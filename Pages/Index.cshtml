@@ -1,0 +1,46 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <form id="messageform" method="post" class="col-sm-6" data-ajax="true" data-ajax-method="post" data-ajax-complete="completed">
+        <div class="form-group row">
+            <label asp-for="Input.Message" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-7">
+                <input asp-for="Input.Message" class="form-control" autofocus autocomplete="off" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-7 offset-sm-3">
+                Device:<br /> <select asp-for="Input.Device" asp-items="Model.Devices"></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-7 offset-sm-3">
+                Voices:<br /> <select asp-for="Input.Voice" asp-items="Model.Voices"></select>
+            </div>
+            <div class="col-sm-7 offset-sm-3">
+                Rate:<br /> <select asp-for="Input.Rate" asp-items="Model.Rates"></select>
+            </div>
+            <div class="col-sm-7 offset-sm-3">
+                <button class="btn btn-primary" id="submit" onsubmit="GoBack()">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        completed = function (xhr) {
+            $("#Input_Message").val('');
+            $("#Input_Message").focus();
+        }
+        $(document).ready(function () {
+            $("#Input_Message").focus();
+        });
+    </script>
+
+    <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.js"></script>
+}
